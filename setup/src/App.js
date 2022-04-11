@@ -53,6 +53,23 @@ function App() {
     }
   }
 
+  useEffect(() => {
+    fetchImages()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [page])
+
+  useEffect(() => {
+    if (!mounted.current) {
+      mounted.current = true
+      return
+    }
+    if (!newImages) return;  // if newImages is false, return
+    if (loading) return;  // if loading is true, return
+    setPage((oldPage) => oldPage + 1); // set page to oldPage + 1
+  }, [newImages])
+
+  
+
   return <h2>stock photos starter</h2>
 }
 
