@@ -107,6 +107,14 @@ function App() {
           </button>
         </form>
       </section>
+      <section className='photos'>
+        <div className='photos-center'>
+          {photos.map((photo, index) => {
+            return <Photo key={index} photo={...photo} />
+          })}
+        </div>
+        {loading && <h2 className='loading'>Loading...</h2>}
+      </section>
     </main>
   )
 }
