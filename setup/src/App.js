@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import { FaSearch } from 'react-icons/fa'
 
 import Photo from './Photo'
-const clientID = `?client_id=${process.env.REACT_APP_ACCESS_KEY}`
+const clientID = `?client_id=lzvetJ_GC6M8QdDkn-D-HtLenu0Cc3pcuiaVZgythBA`
 const mainUrl = `https://api.unsplash.com/photos/`
 const searchUrl = `https://api.unsplash.com/search/photos/`
 
@@ -110,7 +110,7 @@ function App() {
       <section className='photos'>
         <div className='photos-center'>
           {photos.map((photo, index) => {
-            return <Photo key={index} photo={...photo} />
+            return <Photo key={index} {...photo} />
           })}
         </div>
         {loading && <h2 className='loading'>Loading...</h2>}
