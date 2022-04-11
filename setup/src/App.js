@@ -56,7 +56,7 @@ function App() {
   useEffect(() => {
     fetchImages()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page])
+  }, [page])  
 
   useEffect(() => {
     if (!mounted.current) {
@@ -66,11 +66,49 @@ function App() {
     if (!newImages) return;  // if newImages is false, return
     if (loading) return;  // if loading is true, return
     setPage((oldPage) => oldPage + 1); // set page to oldPage + 1
-  }, [newImages])
+  }, [newImages]) // if newImages is true, run fetchImages
 
-  
+  const event = () => { // event handler
+    if(window.innerHeight + window.scrollY >= document.body.scrollHeight - 2) {   // if scroll is at bottom
+      setNewImages(true)  // set newImages to true
+    }
+  }
 
-  return <h2>stock photos starter</h2>
+  useEffect(() => {
+    window.addEventListener('scroll', event)  // add event listener
+    return () => {
+      window.removeEventListener('scroll', event) // remove event listener  when component is unmounted (cleanup)
+    }
+  }, [])  // empty array means run only once
+
+  const handleSubmit = (e) => { // event handler
+    e.preventDefault()  // prevent default behavior
+    if (!query) return;  // if query is empty, return
+    if (page === 1) {   // if page is 1, fetch images
+      fetchImages();
+    }
+    setPage(1); // set page to 1
+  } // end handleSubmit  
+
+
+  return (
+    <main>
+      <section className='search'>
+        <form className='search-form'>
+          <input
+            type='text'
+            placeholder='Search Images'
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            className='form-input'
+          />
+          <button type='submit' className='submit-btn' onClick={handleSubmit}>
+            <FaSearch />
+          </button>
+        </form>
+      </section>
+    </main>
+  )
 }
 
 export default App
