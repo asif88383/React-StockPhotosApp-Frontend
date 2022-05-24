@@ -1,5 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react'
-import { FaSearch } from 'react-icons/fa'
+import React, { useState, useEffect, useRef } from 'react';
+import { FaSearch } from 'react-icons/fa';
+import Adsense from 'react-adsense';
 
 import Photo from './Photo'
 const clientID = `?client_id=lzvetJ_GC6M8QdDkn-D-HtLenu0Cc3pcuiaVZgythBA`
@@ -55,7 +56,6 @@ function App() {
 
   useEffect(() => {
     fetchImages()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page])  
 
   useEffect(() => {
@@ -93,30 +93,37 @@ function App() {
 
   return (
     <main>
-      <section className='search'>
-        <form className='search-form'>
+      <section className="search">
+        <form className="search-form">
           <input
-            type='text'
-            placeholder='Search Images'
+            type="text"
+            placeholder="Search Images"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            className='form-input'
+            className="form-input"
           />
-          <button type='submit' className='submit-btn' onClick={handleSubmit}>
+          <button type="submit" className="submit-btn" onClick={handleSubmit}>
             <FaSearch />
           </button>
         </form>
       </section>
-      <section className='photos'>
-        <div className='photos-center'>
+      <section className="photos">
+        <div className="photos-center">
+          <Adsense.Google
+            client="ca-pub-4533847692853543"
+            slot="4894087908"
+            style={{ display: "block" }}
+            layout="in-article"
+            format="fluid"
+          />
           {photos.map((photo, index) => {
-            return <Photo key={index} {...photo} />
+            return <Photo key={index} {...photo} />;
           })}
         </div>
-        {loading && <h2 className='loading'>Loading...</h2>}
+        {loading && <h2 className="loading">Loading...</h2>}
       </section>
     </main>
-  )
+  );
 }
 
 export default App
